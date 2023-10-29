@@ -15,6 +15,7 @@ Here is a link to the dashboard:
   - [Hypothesis and how to validate?](#hypothesis-and-how-to-validate)
   - [The rationale to map the business requirements to the Data Visualisations and ML tasks](#the-rationale-to-map-the-business-requirements-to-the-data-visualisations-and-ml-tasks)
   - [ML Business Case](#ml-business-case)
+    - [Powdery Mildew Detector](#powdery-mildew-detector)
   - [Dashboard Design](#dashboard-design)
   - [Unfixed Bugs](#unfixed-bugs)
   - [Deployment](#deployment)
@@ -134,17 +135,70 @@ The client will be able to tell if a tree is diseased in a much shorter time spa
    * This can be validated by training and fitting two models, once using the original sigmoig and once using the softmax activation function for the output layer and then comparing the performance metrics of both models
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
-* List your business requirements and a rationale to map them to the Data Visualisations and ML tasks.
 
+1. Business Requirement - The client is interested in conducting a study to visually differentiate a healthy cherry leaf from one with powdery mildew.
+
+This leads to the following User Stories:
+
+* As a client I want to have a dashboard so I can easily access the study on visual differentiation between healthy and diseased leaves
+* As a client I want to see difference between an average healthy leaf and an average leaf that is affected by powdery mildew so that I can differentiate the leaves
+* As a client I want to see an image montage of healthy and affected leaves so I can see the difference between the leaves intuitively
+
+2. Business Requirement - The client is interested in predicting if a cherry leaf is healthy or contains powdery mildew.
+
+This leads to the following User Stories:
+
+* As a client I want to predict whether any leaf is affected by powdery mildew or healthy so that I can quickly say whether a tree is healthy or not
+  
+The following tasks aim to solve the needs presented in the user stories for Business Requirement 1 and 2:
+
+* Creation of a Streamlit dashboard page containing data visualization and an image study
+  * The image study contains average images and variability images for healthy leaves and leaves with powdery mildew
+  * The image study contains mean and standard deviation images for both classes
+  * The image study contains an image montage for both classes
+* Creation of an ML Model (Binary classifier) that can predict whether an image shows a healthy or affected leaf
+* Creation of a Streamlit dashboard page containing the ML model predictor
+  * There should be an upload section that supports one or multiple images
+  * The page should display the prediction result in a clear way
 
 ## ML Business Case
-* In the previous bullet, you potentially visualised an ML task to answer a business requirement. You should frame the business case using the method we covered in the course.
 
+### Powdery Mildew Detector
+
+* We want an ML model to predict if a leaf is affected by Powdery Mildew or not, based on the image data contained in the dataset mentioned above. We utilize supervised learning to create a binary classifier with a single label.
+* The ideal outcome is a reliable predictor that can speed up the diagnosis of healthy/affected crops on a cherry plantation.
+* The success metrics are:
+  * Accuracy of 97% on the test set.
+* The model output is defined as a flag, showing whether the leaf has powdery mildew or not and the associated probability of the prediction. The plantation workers will upload one or more images in the predictor and the predictor will output the results per image on the fly (not in batches).
+* Heuristics: The current method of detecting whether a tree is healthy or not requires an employee to spend around 30 minutes in each tree, taking a few samples of tree leaves and verifying visually if the leaf tree is healthy or has powdery mildew. Since the company has thousands of cherry trees, located on multiple farms across the country, this manual process is not scalable due to the time spent in the manual process inspection. 
+* The training data is a [Kaggle dataset](https://www.kaggle.com/codeinstitute/cherry-leaves) with over 4000 images of healthy and affected cherry leaves. 
+* The training data is labelled with the target as healthy or containing powdery mildew. The features are all images. 
 
 ## Dashboard Design
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other items, that your dashboard library supports.
-* Finally, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project, you were confident you would use a given plot to display an insight, but later, you chose another plot type).
 
+1. Project Summary
+   1. General information
+   2. Project Dataset
+   3. Link to additional information (README)
+   4. Business requirements
+2. Leaf Visualizer - This page will answer business requirement 1
+    1. Checkbox 1 - Difference between average and variability image
+    2. Checkbox 2 - Differences between average affected leaves with powdery mildew and average healthy leaves
+    3. Checkbox 3 - Image Montage
+3. Powdery Mildew Detector - This page will answer business requirement 2
+   1. Link to download a set of sample images for live prediction
+   2. User interface with a file uploader widget
+      1. User should be able to upload one or more images
+      2. The page should display each image and a prediction statement indicating whether the leaf is healthy or has powdery mildew
+      3. Show the probability of the prediction
+      4. Table containing the image name and the prediction per image including the probability
+      5. Download link for the tabular report
+4. Project Hypotheses
+   1. Block for each project hypothesis, describe the conclusion and how you validated it.
+5. ML Performance
+   1. Label Frequencies plot for Train, Validation and Test Sets
+   2. Model History - Accuracy and Losses
+   3. Model evaluation result
 
 ## Unfixed Bugs
 * You will need to mention unfixed bugs and why they were unfixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable for consideration, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
@@ -177,8 +231,6 @@ The client will be able to tell if a tree is diseased in a much shorter time spa
 * [What is CRISP-DM](https://www.datascience-pm.com/crisp-dm-2/) - Further reading on CRISP-DM, referenced to understand the concept and to write the Readme section
 
 ### Media
-
-
 
 * In this section, you need to reference where you got your content, media and from where you got extra help. It is common practice to use code from other repositories and tutorials. However, it is necessary to be very specific about these sources to avoid plagiarism. 
 * You can break the credits section up into Content and Media, depending on what you have included in your project. 

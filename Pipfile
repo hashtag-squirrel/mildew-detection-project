@@ -17,6 +17,7 @@ protobuf = "==3.20"
 altair = "<5"
 
 [dev-packages]
+ipykernel = "*"
 
 [requires]
 python_version = "3.8"

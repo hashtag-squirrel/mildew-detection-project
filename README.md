@@ -4,7 +4,7 @@ This repo contains a machine learning project aiming to solve a fictional busine
 
 The machine learning model is trained on healthy and diseased images of cherry leaves and the main goal is to predict wether any given new image of a cherry leaf is healthy or diseased. 
 
-Here is a link to the dashboard:
+Here is a link to the dashboard: 
 
 ## Table of Contents - [Mildew Detection in Cherry Leaves](#mildew-detection-in-cherry-leaves)
 - [Mildew Detection in Cherry Leaves](#mildew-detection-in-cherry-leaves)
@@ -20,14 +20,14 @@ Here is a link to the dashboard:
   - [Unfixed Bugs](#unfixed-bugs)
   - [Deployment](#deployment)
     - [Heroku](#heroku)
-  - [Main Data Analysis and Machine Learning Libraries](#main-data-analysis-and-machine-learning-libraries)
+  - [Technologies, Languages and Packages](#technologies-languages-and-packages)
+    - [Technologies](#technologies)
+    - [Languages](#languages)
+    - [Main Data Analysis and Machine Learning Libraries](#main-data-analysis-and-machine-learning-libraries)
   - [Credits](#credits)
     - [Code](#code)
     - [Content](#content)
     - [Media](#media)
-    - [Content](#content-1)
-    - [Media](#media-1)
-  - [Acknowledgements (optional)](#acknowledgements-optional)
 
 ## CRISP-DM 
 
@@ -218,9 +218,56 @@ The following tasks aim to solve the needs presented in the user stories for Bus
 6. If the slug size is too large then add large files not required for the app to the .slugignore file. 
 
 
-## Main Data Analysis and Machine Learning Libraries
-* Here you should list the libraries used in the project and provide an example(s) of how you used these libraries.
+## Technologies, Languages and Packages
 
+### Technologies 
+
+* GitHub to store the repository and project files
+* Git as a version control system
+* Heroku to deploy and host the project
+* Kaggle to source the dataset
+* VS Code as local IDE
+* Jupyter Notebooks to conduct data collection, preparation and creation of the model
+
+### Languages
+
+* Python 3.8
+
+### Main Data Analysis and Machine Learning Libraries
+
+* Numpy
+  * Used for
+  * Example:
+* Pandas
+  * Used for dataframe processing
+  * Example
+* Matplotlib
+  * Used for
+  * Example:
+* Seaborn
+  * Used for
+  * Example:
+* Plotly
+  * Used for
+  * Example:
+* Streamlit
+  * Used for
+  * Example:
+* Scikit-learn
+  * Used for
+  * Example:
+* Tensorflow-cpu
+  * Used for
+  * Example:
+* Joblib
+  * Used for
+  * Example:
+* Keras
+  * Used for
+  * Example:
+* PIL
+  * Used for
+  * Example:
 
 ## Credits 
 
@@ -235,18 +282,3 @@ The following tasks aim to solve the needs presented in the user stories for Bus
 * In this section, you need to reference where you got your content, media and from where you got extra help. It is common practice to use code from other repositories and tutorials. However, it is necessary to be very specific about these sources to avoid plagiarism. 
 * You can break the credits section up into Content and Media, depending on what you have included in your project. 
 
-### Content 
-
-- The text for the Home page was taken from Wikipedia Article A.
-- Instructions on how to implement form validation on the Sign-Up page were taken from [Specific YouTube Tutorial](https://www.youtube.com/).
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/).
-
-### Media
-
-- The photos used on the home and sign-up page are from This Open-Source site.
-- The images used for the gallery page were taken from this other open-source site.
-
-
-
-## Acknowledgements (optional)
-* Thank the people that provided support throughout this project.

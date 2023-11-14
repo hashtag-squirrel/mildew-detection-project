@@ -1,5 +1,4 @@
 import streamlit as st
-import matplotlib.pyplot as plt
 
 
 def page_summary_body():
@@ -10,8 +9,8 @@ def page_summary_body():
         "**General Information**\n"
         "* Powdery mildew is a fungal disease that affects a wide range of "
         "plants. Powdery mildew diseases are caused by many different species "
-        "of ascomycete fungi in the order Erysiphales.Powdery mildew is one of "
-        "the easier plant diseases to identify, as its symptoms are quite "
+        "of ascomycete fungi in the order Erysiphales.Powdery mildew is one of"
+        "of the easier plant diseases to identify, as its symptoms are quite "
         "distinctive.\n"
         "* The fictitious company Farmy & Foods has large cherry plantations "
         "and have lately encountered powdery mildew on their cherry trees. "
@@ -27,7 +26,7 @@ def page_summary_body():
 
     st.write(
         "* For additional information, please visit and **read** the "
-        "[Project README file](https://github.com/hashtag-squirrel/mildew-detection-project/blob/main/README.md).")
+        "[Project README file](https://github.com/hashtag-squirrel/mildew-detection-project/blob/main/README.md).")  # noqa
 
     st.success(
         "The project has 2 business requirements:\n"

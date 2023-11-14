@@ -1,3 +1,5 @@
+# Code adapted from Code Institute's Malaria walkthrough project
+
 import streamlit as st
 
 

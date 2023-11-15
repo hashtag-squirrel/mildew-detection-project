@@ -1,23 +1,3 @@
-# 4. Project Hypotheses
-#    1. Block for each project hypothesis, describe the conclusion and how you validated it.
-
-# Hypothesis 1: We hypothesize that infected leaves have clear white marks with which they can be distinguished from healthy leaves
-
-# This can be validated by doing an average image study
-
-# Hypothesis 2: We hypothesize that resizing the images to 100 x 100 pixels does not affect the model performance
-
-# This can be validated by training and fitting two models, once using the original image size and once using the resized images and then comparing the performance metrics of both models
-
-# Hypothesis 3: We hypothesize that training and fitting a model on grayscale images does not affect the model performance
-
-# This can be validated by training and fitting two models, once using the original RGB images and once using grayscale images and then comparing the performance metrics of both models
-
-# Hypothesis 4: We hypothesize that a model using the softmax activation function for the output layer performs better than the sigmoid activation function, which is usually chosen for binary classification
-
-# This can be validated by training and fitting two models, once using the original sigmoig and once using the softmax activation function for the output layer and then comparing the performance metrics of both models
-
-
 # Code adapted from Code Institute's Malaria walkthrough project
 
 import streamlit as st
@@ -114,8 +94,8 @@ def page_project_hypotheses_body():
         "like it trained well. However, when evaluating on the test set, the "
         "accuracy is only at 94.55%, which is not meeting the business "
         "requirement of 97% accuracy.\n"
-        "* When trying the predictions on random images from the test set, the "
-        "prediction probability also ranges from around 60% up to 99%, "
+        "* When trying the predictions on random images from the test set, "
+        "the prediction probability also ranges from around 60% up to 99%, "
         "depending on the image.\n"
     )
 
@@ -176,7 +156,8 @@ def page_project_hypotheses_body():
     )
 
     st.write(
-        'Accuracy plots of base model vs model using Softmax activation function'
+        'Accuracy plots of base model vs model using Softmax activation '
+        'function'
     )
 
     st.image(
@@ -190,7 +171,7 @@ def page_project_hypotheses_body():
     )
 
     st.write(
-        'Loss plots of base model vs model using grayscale images'
+        'Loss plots of base model vs model using Softmax activation function'
     )
 
     st.image(

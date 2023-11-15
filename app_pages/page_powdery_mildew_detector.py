@@ -20,7 +20,7 @@ def page_powdery_mildew_detector_body():
 
     st.write(
         "* You can download images of healthy and powedery-mildew-affected "
-        "from [here](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves)."  # noqa
+        " leaves from [here](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves)."  # noqa
         )
 
     st.write("---")

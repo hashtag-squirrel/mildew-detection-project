@@ -53,29 +53,33 @@ def page_project_hypotheses_body():
         'Accuracy plots of base model vs model using resized images'
     )
 
-    st.image(
-        "outputs/v1/model_training_acc.png",
-        caption='Accuracy plot of base model using original image size'
-    )
-
-    st.image(
-        "outputs/v2/model_training_acc-resized.png",
-        caption='Accuracy plot of model using image size of 100 x 100 pixels'
-    )
+    col1, col2 = st.beta_columns(2)
+    with col1:
+        st.image(
+            "outputs/v1/model_training_acc.png",
+            caption='Base model'
+        )
+    with col2:
+        st.image(
+            "outputs/v2/model_training_acc-resized.png",
+            caption='Model using images of 100 x 100 pixels'
+        )
 
     st.write(
         'Loss plots of base model vs model using resized images'
     )
 
-    st.image(
-        "outputs/v1/model_training_losses.png",
-        caption='Loss plot of base model using original image size'
-    )
-
-    st.image(
-        "outputs/v2/model_training_losses-resized.png",
-        caption='Loss plot of model using image size of 100 x 100 pixels'
-    )
+    col1, col2 = st.beta_columns(2)
+    with col1:
+        st.image(
+            "outputs/v1/model_training_losses.png",
+            caption='Base model'
+        )
+    with col2:
+        st.image(
+            "outputs/v2/model_training_losses-resized.png",
+            caption='Model using images of 100 x 100 pixels'
+        )
 
     st.write("---")
 
@@ -103,29 +107,33 @@ def page_project_hypotheses_body():
         'Accuracy plots of base model vs model using grayscale images'
     )
 
-    st.image(
-        "outputs/v1/model_training_acc.png",
-        caption='Accuracy plot of base model using original image shape'
-    )
-
-    st.image(
-        "outputs/v3/model_training_acc-grayscale.png",
-        caption='Accuracy plot of model using grayscale images'
-    )
+    col1, col2 = st.beta_columns(2)
+    with col1:
+        st.image(
+            "outputs/v1/model_training_acc.png",
+            caption='Base model'
+        )
+    with col2:
+        st.image(
+            "outputs/v3/model_training_acc-grayscale.png",
+            caption='Model using grayscale images'
+        )
 
     st.write(
         'Loss plots of base model vs model using grayscale images'
     )
 
-    st.image(
-        "outputs/v1/model_training_losses.png",
-        caption='Loss plot of base model using original image shape'
-    )
-
-    st.image(
-        "outputs/v3/model_training_losses-grayscale.png",
-        caption='Loss plot of model using grayscale images'
-    )
+    col1, col2 = st.beta_columns(2)
+    with col1:
+        st.image(
+            "outputs/v1/model_training_losses.png",
+            caption='Base model'
+        )
+    with col2:
+        st.image(
+            "outputs/v3/model_training_losses-grayscale.png",
+            caption='Model using grayscale images'
+        )
 
     st.write("---")
 
@@ -160,26 +168,30 @@ def page_project_hypotheses_body():
         'function'
     )
 
-    st.image(
-        "outputs/v1/model_training_acc.png",
-        caption='Accuracy plot of base model using Sigmoid activation function'
-    )
-
-    st.image(
-        "outputs/v4/model_training_acc-softmax.png",
-        caption='Accuracy plot of model using Softmax activation function'
-    )
+    col1, col2 = st.beta_columns(2)
+    with col1:
+        st.image(
+            "outputs/v1/model_training_acc.png",
+            caption='Base model'
+        )
+    with col2:
+        st.image(
+            "outputs/v4/model_training_acc-softmax.png",
+            caption='Model using Softmax activation function'
+        )
 
     st.write(
         'Loss plots of base model vs model using Softmax activation function'
     )
 
-    st.image(
-        "outputs/v1/model_training_losses.png",
-        caption='Loss plot of base model using Sigmoid activation function'
-    )
-
-    st.image(
-        "outputs/v4/model_training_losses-softmax.png",
-        caption='Loss plot of model using Softmax activation function'
-    )
+    col1, col2 = st.beta_columns(2)
+    with col1:
+        st.image(
+            "outputs/v1/model_training_losses.png",
+            caption='Base model'
+        )
+    with col2:
+        st.image(
+            "outputs/v4/model_training_losses-softmax.png",
+            caption='Model using Softmax activation function'
+        )

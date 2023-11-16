@@ -81,6 +81,14 @@ def page_project_hypotheses_body():
             caption='Model using images of 100 x 100 pixels'
         )
 
+    st.warning(
+        "We can see the accuracy and loss plots of the resized model having "
+        "the correct shape, but the curves of the validation set and training "
+        "set have a bigger difference than the ones on the base model.\n"
+        "The difference for the loss plots on the resized model also seems to "
+        "get bigger towards later epochs."
+    )
+
     st.write("---")
 
     st.info(
@@ -134,6 +142,14 @@ def page_project_hypotheses_body():
             "outputs/v3/model_training_losses-grayscale.png",
             caption='Model using grayscale images'
         )
+
+    st.warning(
+        "We can see the accuracy and loss plots of the grayscale model "
+        "actually look like the model trained more consistently, since there "
+        "are fewer spikes and a more consistent progression, however, the "
+        "overall accuracy in the evaluation was not high enough to justify "
+        "a switch to a model using grayscale images."
+    )
 
     st.write("---")
 
@@ -195,3 +211,10 @@ def page_project_hypotheses_body():
             "outputs/v4/model_training_losses-softmax.png",
             caption='Model using Softmax activation function'
         )
+
+    st.warning(
+        "We can see the loss and accuracy curves of both models look quite "
+        "similar overall, however, the model using the Softmax activation "
+        "function has smaller spikes in the validation set curves and is "
+        "therefore deemed slightly better than the base model."
+    )

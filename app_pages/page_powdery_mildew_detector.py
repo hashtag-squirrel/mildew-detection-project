@@ -14,8 +14,8 @@ from src.machine_learning.predictive_analysis import (
 
 def page_powdery_mildew_detector_body():
     st.info(
-        "* The client is interested in predicting if a cherry leaf is "
-        "healthy or contains powdery mildew.\n"
+        "* Business Requirement 2 - The client is interested in predicting if "
+        "a cherry leaf is healthy or contains powdery mildew.\n"
         )
 
     st.write(

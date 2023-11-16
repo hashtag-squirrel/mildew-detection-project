@@ -43,3 +43,10 @@ def page_ml_performance_metrics():
     st.write("### Generalised Performance on Test Set")
     st.dataframe(pd.DataFrame(load_test_evaluation("v4"),
                               index=['Loss', 'Accuracy']))
+
+    st.info(
+        "We can see that the accuracy is at 98.1%, therefore fitting the "
+        "expectation of the client of a minimum accuracy of 97%.\n"
+        "Therefore we can say that the ML model created has successfully "
+        "answered the business requirement set by the client."
+    )

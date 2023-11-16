@@ -12,6 +12,14 @@ def page_ml_performance_metrics():
     st.image("outputs/v1/labels_distribution.png",
              caption='Labels Distribution on Train, Validation and Test Sets')
 
+    st.info(
+        "The images provided were split into train, test and validation sets, "
+        "where the train set contains 70% of all images, the test set "
+        "contains 20% and the validation set contains 10%.\n"
+        "The plot above visualizes the split and shows that both labels "
+        "are distributed evenly across the sets."
+    )
+
     st.write("---")
 
     st.write("### Model History")
@@ -22,6 +30,13 @@ def page_ml_performance_metrics():
     with col2:
         st.image("outputs/v4/model_training_losses-softmax.png",
                  caption='Model Training Losses')
+
+    st.info(
+        "The plots above show the accuracy and losses plots for the model "
+        "trained with the Softmax activation function. We can see that there "
+        "are some spikes in the validation, but other than that the curves "
+        "follow each other closely and show a good progression as expected."
+    )
 
     st.write("---")
 

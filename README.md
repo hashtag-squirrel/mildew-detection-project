@@ -16,6 +16,10 @@ Here is a link to the dashboard:
   - [The rationale to map the business requirements to the Data Visualisations and ML tasks](#the-rationale-to-map-the-business-requirements-to-the-data-visualisations-and-ml-tasks)
   - [ML Business Case](#ml-business-case)
     - [Powdery Mildew Detector](#powdery-mildew-detector)
+    - [Rationale for the Model](#rationale-for-the-model)
+      - [Description of the model](#description-of-the-model)
+      - [Process of creating the model](#process-of-creating-the-model)
+      - [Some considerations on the hyperparameters](#some-considerations-on-the-hyperparameters)
   - [Dashboard Design](#dashboard-design)
   - [Unfixed Bugs](#unfixed-bugs)
   - [Deployment](#deployment)
@@ -27,7 +31,6 @@ Here is a link to the dashboard:
   - [Credits](#credits)
     - [Code](#code)
     - [Content](#content)
-    - [Media](#media)
 
 ## CRISP-DM 
 
@@ -174,6 +177,63 @@ The following tasks aim to solve the needs presented in the user stories for Bus
 * The training data is a [Kaggle dataset](https://www.kaggle.com/codeinstitute/cherry-leaves) with over 4000 images of healthy and affected cherry leaves. 
 * The training data is labelled with the target as healthy or containing powdery mildew. The features are all images. 
 
+### Rationale for the Model
+
+#### Description of the model
+
+The model consists of three convolutional layers of which the first is the input layer, a flattening layer and two fully connected layers of which the second is the output layer. 
+
+* Each convolutional layer consists of one Conv2D layer, which is commonly used for 2d images to extract the features by applying convolutional filters, followed by a MaxPooling2D layer, which downsamples feature maps to reduce the dimensions of the image. 
+* The flattening layer converts the 2-dimensional features maps into a 1-dimensional vector to prepare for the fully connected layers.
+* The fully connected (dense) layers learn higher-level features from the flattened vector. 
+  * The first dense layer is followed by a dropout layer, which randomly deactivates neurons during training to prevent overfitting of the model. 
+  * The second dense layer is also the output layer, which utilizes the Softmax activation function for multi-class classification. 
+
+The model is compiled using the categorial cross-entropy loss function, the Adagrad optimizer and accuracy as the evaluation metric. 
+
+#### Process of creating the model
+
+To determine the structure of the network and its hyperparameters, I went through a process of training and fitting 11 models with different filters, optimizers, kernel sizes and different parameters for early stopping. While the process I used was not very scientific, I did achieve to get a model that fit the business requirement and predicted reliably. 
+
+The starting point for this trial-and-error process was the model used in the [Malaria Detector Walkthrough](https://github.com/Code-Institute-Org/WalkthroughProject01) project by Code Institute, as well as following common conventions, e.g. keeping the number of filters as a power of two. 
+
+| Model | Model parameter that changed                                | Conclusion                                                                                  | Loss plot | Accuracy plot | Training time/min |
+|-------|-------------------------------------------------------------|---------------------------------------------------------------------------------------------|-----------|---------------|-------------------|
+| 1     | Model from Walkthrough project                              | The model is underfitting and stopped very early, after only 5 epochs                       |![Loss plot](docs/model_training_losses.png)|![Accuracy plot](docs/model_training_acc.png)| 10                |
+| 2     | Reduced the filters on Convolutional layers by half         | The model is underfitting, and again stopped very early, after only 5 epochs                     |![Loss plot](docs/model_training_losses2.png)|![Accuracy plot](docs/model_training_acc2.png)| 5                 |
+| 3     | Removed early stopping                                      | The model seems to be underfitting                                                          |![Loss plot](docs/model_training_losses3.png)|![Accuracy plot](docs/model_training_acc3.png)| 30                |
+| 4     | Changed optimizer to Adadelta                               | The model seems to be overfitting                                                           |![Loss plot](docs/model_training_losses4.png)|![Accuracy plot](docs/model_training_acc4.png)| 39                |
+| 5     | Changed optimizer to RMSprop                                | The model is underfitting, there are a lot of spikes in the val_loss plot and the curves are diverging on later epochs |![Loss plot](docs/model_training_losses5.png)|![Accuracy plot](docs/model_training_acc5.png)| 30|
+| 6     | Changed optimizer to Adagrad                                | Relatively better fit, but a few spikes remain in both val_loss and val_accuracy              |![Loss plot](docs/model_training_losses6.png)|![Accuracy plot](docs/model_training_acc6.png)| 28                |
+| 7     | Reintroducing early stopping at patience 7                  | Training did not stop early, but went through all 25 epochs                                 |![Loss plot](docs/model_training_losses7.png)|![Accuracy plot](docs/model_training_acc7.png)| 26                |
+| 8     | Adjusted patience for early stopping to 5                   | Training did not stop early, but went through all 25 epochs                                 |![Loss plot](docs/model_training_losses8.png)|![Accuracy plot](docs/model_training_acc8.png)| 26                |
+| 9     | Adjusted patience for early stopping to 3                   | Stopped after 20 epochs                                                                     |![Loss plot](docs/model_training_losses9.png)|![Accuracy plot](docs/model_training_acc9.png)| 20                |
+| 10    | Adjusted the filers on Convolutional layers to double again | val_loss and val_accuracy show more spikes again                                               |![Loss plot](docs/model_training_losses10.png)|![Accuracy plot](docs/model_training_acc10.png)| 27                |
+| 11    | Changed kernel size from (3, 3) to (2, 2)                   | Shows the nicest progression so far, with a few spikes remaining                               |![Loss plot](docs/model_training_losses11.png)|![Accuracy plot](docs/model_training_acc11.png)| 18                |
+
+Model 11 is what I called the Base model henceforth, which was used to compare the subsequent models from the hypotheses to. It is not a perfect model, and I could have gone on optimizing the different hyperparameters to achieve a better model, however, I eventually decided to stop at this point, since the evaluation also showed that the model performed well enough. 
+
+During the trial and error phase I did not choose to switch the activation function of the output layer, since I wanted to keep this for Hypothesis 4. 
+
+#### Some considerations on the hyperparameters
+
+* Filters
+  * It is generally recommended to use numbers for filters on convolutional layers that are a power of two. 
+  * Since higher filter numbers lead to higher training times, I did not dare to go above the initial numbers of 32 for the input layer and 64 for the subsequent convolutional layers.
+  * I did try to halve the filter number, but eventually went back to the initial number of filters on my layers. I did not try to change the number of filters on individual layers.
+
+* Kernel size
+  * The starting point for my kernel size was the model from the Malaria walkthrough, as mentioned above. 
+  * Since higher kernel size leads to higher training times, I did keep the kernel size, and only reduced it in the last trial.
+  * Towards the end of my project, I read [an article](https://medium.com/analytics-vidhya/how-to-choose-the-size-of-the-convolution-filter-or-kernel-size-for-cnn-86a55a1e2d15) that stated that even numbers on kernel size are not recommended, but 3x3 is the recommended size. Since the project was almost done at this point and my model does perform well enough, I decided not to go back on my decision.
+
+* Optimizer
+  * I tried a few different optimizers from the Keras documentation and decided that Adagrad had the best performance
+
+* Activation function
+  * For the convolutional layers, I used ReLU, which is the most popular activation function for convolutional layers (according to https://builtin.com/machine-learning/relu-activation-function) and it performed well. I did not see a reason to change it. 
+  * For the output layer, I used Sigmoid in the trial and error phase, which is the usual function used for binary classification, which our project is. I did change this to Softmax to check my Hypothesis 4 and saw that it performed slightly better, in that the model trained quicker with the Softmax function. Softmax is an unusual choice here, since it is more commonly used for multi-class classification. The case at hand can be seen as multiclass with two classes though and as we could see, Softmax worked well. 
+
 ## Dashboard Design
 
 1. Project Summary
@@ -201,12 +261,13 @@ The following tasks aim to solve the needs presented in the user stories for Bus
    3. Model evaluation result
 
 ## Unfixed Bugs
-* You will need to mention unfixed bugs and why they were unfixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable for consideration, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
+
+* At the moment of deployment, there were no known unfixed bugs. 
 
 ## Deployment
 ### Heroku
 
-* The App live link is: https://YOUR_APP_NAME.herokuapp.com/ 
+* The App live link is: https://cherry-mildew-detector-bb62e8fa96ca.herokuapp.com/
 * Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
 * The project was deployed to Heroku using the following steps.
 
@@ -236,49 +297,43 @@ The following tasks aim to solve the needs presented in the user stories for Bus
 ### Main Data Analysis and Machine Learning Libraries
 
 * Numpy
-  * Used for
-  * Example:
+  * Used for performing numerous array operations
+  * Example: converting images into numpy arrays
 * Pandas
   * Used for dataframe processing
-  * Example
+  * Example: Collect the model history in a dataframe
 * Matplotlib
-  * Used for
-  * Example:
+  * Used for data visualization
+  * Example: Used to plot accuracy/loss plots
 * Seaborn
-  * Used for
-  * Example:
+  * Used for data visualization
+  * Example: Used to create the bar plot showing the labels distribution
 * Plotly
-  * Used for
-  * Example:
+  * Used for data visualization
+  * Example: Used to create the bar plot on the Powdery Mildew Detection dashboard page showing the prediction probability
 * Streamlit
-  * Used for
-  * Example:
-* Scikit-learn
-  * Used for
-  * Example:
+  * Used for dashboard creation
+  * Example: Used to create the dashboard that is deployed to heroku
 * Tensorflow-cpu
-  * Used for
-  * Example:
+  * Used for modelling
+  * Example: Used for creating the CNN pipeline
 * Joblib
-  * Used for
-  * Example:
+  * Used for file operations
+  * Example: Used to save data in different file formats, e.g. class_indices.pkl
 * Keras
-  * Used for
-  * Example:
+  * Used for modelling
+  * Example: Used for the hyperparameters, but also for image augmentation 
 * PIL
-  * Used for
-  * Example:
+  * Used for image operations
+  * Example: Image class used to resize input on the Powdery Mildew Detection dashboard page
 
 ## Credits 
 
 ### Code
 
+* The [Malaria Detector Walkthrough](https://github.com/Code-Institute-Org/WalkthroughProject01) was used as a guidance for this project in many parts, and many code snippets were adapted from there and are credited in the code and notebooks as well. 
+* Other than that, the lesson material on Tensorflow and image analysis was referenced throughout the project. 
+
 ### Content
 
 * [What is CRISP-DM](https://www.datascience-pm.com/crisp-dm-2/) - Further reading on CRISP-DM, referenced to understand the concept and to write the Readme section
-
-### Media
-
-* In this section, you need to reference where you got your content, media and from where you got extra help. It is common practice to use code from other repositories and tutorials. However, it is necessary to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section up into Content and Media, depending on what you have included in your project. 
-

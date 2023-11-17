@@ -61,7 +61,7 @@ def load_model_and_predict(my_image, version):
         pred_proba = 1 - pred_proba
 
     st.write(
-        f"The predictive analysis for the sample leaf indicates:"
+        f"The predictive analysis for the sample leaf indicates: "
         f"**{pred_class.lower()}**.")
 
     return pred_proba, pred_class

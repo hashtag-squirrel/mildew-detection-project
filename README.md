@@ -4,7 +4,7 @@ This repo contains a machine learning project aiming to solve a fictional busine
 
 The machine learning model is trained on healthy and diseased images of cherry leaves and the main goal is to predict whether any given new image of a cherry leaf is healthy or diseased. 
 
-Here is a link to the dashboard: https://cherry-mildew-detector-bb62e8fa96ca.herokuapp.com/
+Here is a link to the dashboard: https://mildew-detection.streamlit.app
 
 ## Table of Contents - [Mildew Detection in Cherry Leaves](#mildew-detection-in-cherry-leaves)
 - [Mildew Detection in Cherry Leaves](#mildew-detection-in-cherry-leaves)
@@ -267,6 +267,8 @@ During the trial and error phase, I did not choose to switch the activation func
 * At the moment of deployment, there were no known unfixed bugs. 
 
 ## Deployment
+
+The app is currently deployed on Streamlit.
 ### Heroku
 
 * The App live link is: https://cherry-mildew-detector-bb62e8fa96ca.herokuapp.com/

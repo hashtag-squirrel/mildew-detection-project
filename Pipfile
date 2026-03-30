@@ -4,20 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "==1.19.2"
-pandas = "==1.1.2"
-matplotlib = "==3.3.1"
-seaborn = "==0.11.0"
-plotly = "==4.12.0"
-streamlit = "==0.85.0"
-tensorflow-cpu = "==2.6.0"
-keras = "==2.6.0"
-protobuf = "==3.20"
-altair = "<5"
-joblib = "*"
-
-[dev-packages]
-ipykernel = "*"
+setuptools = "*"
+wheel = "*"
+numpy          = ">=1.26.4,<2.0"     # TF 2.18 supports NumPy 2.0 but with edge-case caveats; staying on 1.26.x is safer
+pandas         = ">=2.2.0"
+matplotlib     = ">=3.9.0"
+seaborn        = ">=0.13.2"
+plotly         = ">=5.24.0"
+streamlit      = ">=1.40.0"
+tensorflow-cpu = "==2.18.0"          # First TF with Python 3.12 + NumPy 2 support; last to use tf-keras compatibility layer cleanly
+tf-keras       = ">=2.18.0"          # Keras 2 compatibility shim for TF 2.16+
+joblib         = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.12"

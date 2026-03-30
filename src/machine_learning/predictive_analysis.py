@@ -4,10 +4,13 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.express as px
-from tensorflow.keras.models import load_model
 from PIL import Image
 from src.data_management import load_pkl_file
+import os
 
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
+
+from tensorflow.keras.models import load_model
 
 def plot_predictions_probabilities(pred_proba, pred_class):
     """
